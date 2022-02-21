@@ -26,14 +26,17 @@ public class TestServlet extends HttpServlet {
         out.println("<html>");
         out.println("<head>");
 
-	    String title = "bonjour leo";
+	    String title = "bonjour Mr";
 	    Date date = new Date();
 
 	    out.println("<title>" + title + "</title>");
         out.println("</head>");
         out.println("<body bgcolor=\"white\">");
 
-        out.println("<h1>" + title + " trkl?" + "</h1>");
+        out.print("Identifiant");
+        out.println("<input>");
+        out.print("Identifiant");
+        out.println("<input>");
         out.println(date);
         out.println("</body>");
         out.println("</html>");
