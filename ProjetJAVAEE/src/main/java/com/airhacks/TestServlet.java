@@ -35,7 +35,7 @@ public class TestServlet extends HttpServlet {
 		Connection conn = DriverManager.getConnection(url, user, password);
 
 		ArrayList<String> utilisateurs = new ArrayList<>();
-		req1 = "SELECT `login` FROM utilisateur";
+		req1 = "SELECT `login`, `mdp` FROM utilisateur";
 		Statement st1 = conn.createStatement();
 		ResultSet RS1 = st1.executeQuery(req1);
 
@@ -43,6 +43,10 @@ public class TestServlet extends HttpServlet {
 			String login = RS1.getString(1);
 			System.out.println(login);
 			utilisateurs.add(login);
+			
+			String mdp = RS1.getString(2);
+			System.out.println(mdp);
+			utilisateurs.add(mdp);
 			
 		}
 
@@ -57,8 +61,10 @@ public class TestServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 		try {
-			if (request.getParameter("login")==connect().get(0)) {
-				request.setAttribute("title", connect().get(0));
+			String log = connect().get(0);
+			String mdp = connect().get(1);
+			if (log.equals(request.getParameter("login")) && mdp.equals(request.getParameter("mdp"))) {
+				request.setAttribute("title", log);
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
