@@ -57,8 +57,9 @@ public class TestServlet extends HttpServlet {
 		try {
 			if (connect().size() > 0 ) {
 				response.setContentType("text/html");
-				//PrintWriter out = response.getWriter();
-				request.setAttribute("nom", request.getParameter("nom"));
+				PrintWriter out = response.getWriter();
+				out.print(connect().get(0));
+				request.setAttribute(connect().get(0), request.getParameter("nom"));
 				RequestDispatcher view = request.getRequestDispatcher("WEB-INF/template/accueil.jsp");
 				view.forward(request, response);
 				
