@@ -23,7 +23,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/dealju0404/Downloads/mediatek2022.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dealju0404/Downloads/persistance.jar"/>
+	<classpathentry kind="lib" path="Z:/2A/s4/javaee/pj/mediatek2022.jar"/>
+	<classpathentry kind="lib" path="Z:/2A/s4/javaee/pj/persistance.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
