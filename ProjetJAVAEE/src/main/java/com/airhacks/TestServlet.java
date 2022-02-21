@@ -54,19 +54,21 @@ public class TestServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+
+		// out.print(connect().get(0));
+
 		try {
-			if (connect().size() > 0 ) {
-				response.setContentType("text/html");
-				PrintWriter out = response.getWriter();
-				out.print(connect().get(0));
-				request.setAttribute(connect().get(0), request.getParameter("nom"));
-				RequestDispatcher view = request.getRequestDispatcher("WEB-INF/template/accueil.jsp");
-				view.forward(request, response);
-				
-			}
+			request.setAttribute("title", connect().get(0));
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+
+		request.setAttribute("nom", request.getParameter("nom"));
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/template/accueil.jsp");
+		view.forward(request, response);
+
 	}
 
 }
