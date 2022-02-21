@@ -64,7 +64,8 @@ public class TestServlet extends HttpServlet {
 			String log = connect().get(0);
 			String mdp = connect().get(1);
 			if (log.equals(request.getParameter("login")) && mdp.equals(request.getParameter("mdp"))) {
-				request.setAttribute("title", log);
+				RequestDispatcher view = request.getRequestDispatcher("WEB-INF/template/pagep.jsp");
+				view.forward(request, response);
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
