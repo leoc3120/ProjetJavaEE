@@ -43,6 +43,7 @@ public class TestServlet extends HttpServlet {
 			String login = RS1.getString(1);
 			System.out.println(login);
 			utilisateurs.add(login);
+			
 		}
 
 		RS1.close();
@@ -55,20 +56,18 @@ public class TestServlet extends HttpServlet {
 			throws IOException, ServletException {
 
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-
-		// out.print(connect().get(0));
-
 		try {
-			request.setAttribute("title", connect().get(0));
+			if (request.getParameter("login")==connect().get(0)) {
+				request.setAttribute("title", connect().get(0));
+			}
+
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 
-		request.setAttribute("nom", request.getParameter("nom"));
+		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/template/accueil.jsp");
 		view.forward(request, response);
-
 	}
 
 }

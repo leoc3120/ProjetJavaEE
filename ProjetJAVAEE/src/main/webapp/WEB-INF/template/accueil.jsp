@@ -10,11 +10,10 @@
 <body>
     <h1>${requestScope["title"]} big boss</h1>
     <form>
-        <b>Nom:</b> ${requestScope["nom"]}</b>
-        <input type="type" name="nom"></input>
-        <br>
-        <b>Mot de passe</b>
-        <input type="type" name="mdp"></input>
+        <b>Login :</b><br>
+        <input type="type" name="login" id="login"></input><br><br>
+        <b>Mot de passe :</b><br>
+        <input type="type" name="mdp" id="mdp"></input>
         <input type="submit"></input>
     </form>
 </body>
