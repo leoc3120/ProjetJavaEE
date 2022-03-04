@@ -42,6 +42,8 @@ public class TestServlet extends HttpServlet implements DataManager {
 		try {
 			if(getUser(request.getParameter("login"),request.getParameter("mdp")) != null) {
 				view = request.getRequestDispatcher("WEB-INF/template/pagep.jsp");
+				request.setAttribute("login", request.getParameter("login"));
+				request.setAttribute("documents", tousLesDocumentsDisponibles().get(0).toString());
 				view.forward(request, response);
 			}	
 		} catch (SQLException e) {
@@ -97,7 +99,7 @@ public class TestServlet extends HttpServlet implements DataManager {
         Connection conn = getConnection();
         PreparedStatement stmt = conn.prepareStatement("SELECT `id_u` FROM utilisateur WHERE `nom_u`=?;");
         stmt.setString(1, nomUtilisateur);
-        stmt.setAttribute("login", stmt.getParameter("login"));
+
         ResultSet res = stmt.executeQuery();
 
         Integer id = res.next() ? res.getInt(1) : null;
