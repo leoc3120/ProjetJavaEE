@@ -1,4 +1,4 @@
-fr\mediaweb\persistance\DataManager.class
+fr\mediaweb\persistance\MediathequeData.class
 fr\mediaweb\persistance\MediathequeUtilisateur.class
 fr\mediaweb\persistance\TestServlet.class
 fr\mediaweb\persistance\MediathequeDocument.class
