@@ -28,7 +28,7 @@ public class ServletMediatheque extends HttpServlet {
 		if(u != null) {
 			view = request.getRequestDispatcher("WEB-INF/template/pagep.jsp");
 			request.setAttribute("nomU", u.name());
-			for(int i=1; i<Mediatheque.tousLesDocumentsDisponibles().size(); i++) {
+			/*for(int i=1; i<Mediatheque.tousLesDocumentsDisponibles().size(); i++) {
 				if(i == 1) {
 					request.setAttribute("documents", Mediatheque.tousLesDocumentsDisponibles().get(i).toString());
 				}
@@ -36,7 +36,9 @@ public class ServletMediatheque extends HttpServlet {
 					request.setAttribute("documents", request.getAttribute("documents") 
 							+ Mediatheque.tousLesDocumentsDisponibles().get(i).toString());
 				}
-			};
+			};*/
+			request.setAttribute("documents", Mediatheque.tousLesDocumentsDisponibles());
+			request.setAttribute("nbDoc", Mediatheque.tousLesDocumentsDisponibles().size());
 					
 			view.forward(request, response);
 		}

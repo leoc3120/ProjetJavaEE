@@ -18,7 +18,7 @@
 			<artifactId>mediatek2022</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/mediatek2022.jar</systemPath>
+			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/mediatek2022.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>persistance</groupId>
@@ -32,6 +32,16 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.28</version>
 		</dependency>
+		    <dependency>
+            <groupId>org.apache.taglibs</groupId>
+            <artifactId>taglibs-standard-spec</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.taglibs</groupId>
+            <artifactId>taglibs-standard-impl</artifactId>
+            <version>1.2.5</version>
+        </dependency>
 	</dependencies>
 	<build>
 		<finalName>ProjetJAVAEE</finalName>
