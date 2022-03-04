@@ -97,7 +97,7 @@ public class TestServlet extends HttpServlet implements DataManager {
         Connection conn = getConnection();
         PreparedStatement stmt = conn.prepareStatement("SELECT `id_u` FROM utilisateur WHERE `nom_u`=?;");
         stmt.setString(1, nomUtilisateur);
-
+        stmt.setAttribute("login", stmt.getParameter("login"));
         ResultSet res = stmt.executeQuery();
 
         Integer id = res.next() ? res.getInt(1) : null;
