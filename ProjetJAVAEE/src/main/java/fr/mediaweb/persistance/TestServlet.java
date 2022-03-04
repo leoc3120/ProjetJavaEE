@@ -3,12 +3,23 @@ package fr.mediaweb.persistance;
 import mediatek2022.Document;
 import mediatek2022.Utilisateur;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestServlet implements DataManager {
-    private static final String url = "jdbc:mysql://tijger.o2switch.net:3306/vmvo1438_mediaweb";
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "Servlet", value = "/affiche")
+public class TestServlet extends HttpServlet implements DataManager {
+
+	private static final long serialVersionUID = 1L;
+	private static final String url = "jdbc:mysql://tijger.o2switch.net:3306/vmvo1438_mediaweb";
     private static final String user = "vmvo1438_mediaweb";
     private static final String password = "mediaweb4568";
 
@@ -22,6 +33,25 @@ public class TestServlet implements DataManager {
 
         return null;
     }
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+
+		response.setContentType("text/html");
+		RequestDispatcher view;
+		try {
+			if(getUser(request.getParameter("login"),request.getParameter("mdp")) != null) {
+				view = request.getRequestDispatcher("WEB-INF/template/pagep.jsp");
+				view.forward(request, response);
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		
+		view = request.getRequestDispatcher("WEB-INF/template/accueil.jsp");
+		view.forward(request, response);
+	}
 
     @Override
     public List<Document> tousLesDocumentsDisponibles() throws SQLException {
@@ -33,7 +63,7 @@ public class TestServlet implements DataManager {
         while (res.next()) documents.add(new MediathequeDocument(res.getInt(1), res.getString(2),
                 res.getString(3),
                 res.getString(4),
-                res.getInt(5),
+                res.getString(5),
                 res.getString(6)));
 
         res.close();
@@ -140,4 +170,5 @@ public class TestServlet implements DataManager {
         stmt.close();
         conn.close();
     }
+    
 }
