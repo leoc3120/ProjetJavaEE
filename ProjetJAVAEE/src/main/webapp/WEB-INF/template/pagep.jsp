@@ -8,8 +8,11 @@
 </head>
 
 <body>
-    <h1>bonjour</h1>
- 
+    
+    <h1>bonjour ></h1><br>
+     <h1>Vos documents actuels </h1><br>
+ 	<input type="submit" id="BtnEmp">Emprunter</input> <br>
+ 	<input type="submit" id="BtnRend">Rendre</input><br>
     </form>
 </body>
 
