@@ -57,7 +57,7 @@ public class TestServlet extends HttpServlet implements DataManager {
     public List<Document> tousLesDocumentsDisponibles() throws SQLException {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
-        ResultSet res = stmt.executeQuery("SELECT `id_d`, `titre_d`, `auteur_d`, `type_d`, `emprunt_d`, `options_d` FROM document;");
+        ResultSet res = stmt.executeQuery("SELECT `id_d`, `type_d`, `emprunt_d`, `titre_d`, `auteur_d`, `options_d` FROM document;");
 
         List<Document> documents = new ArrayList<>();
         while (res.next()) documents.add(new MediathequeDocument(res.getInt(1), res.getString(2),
@@ -74,11 +74,11 @@ public class TestServlet extends HttpServlet implements DataManager {
     }
 
     @Override
-    public Utilisateur getUser(String login, String password) throws SQLException {
+    public Utilisateur getUser(String identifiant, String mdp) throws SQLException {
         Connection conn = getConnection();
         PreparedStatement stmt = conn.prepareStatement("SELECT `id_u`, `nom_u`, `type_u` FROM utilisateur WHERE `login`=? AND `mdp`=?;");
-        stmt.setString(1, login);
-        stmt.setString(2, password);
+        stmt.setString(1, identifiant);
+        stmt.setString(2, mdp);
 
         ResultSet res = stmt.executeQuery();
 
@@ -112,7 +112,7 @@ public class TestServlet extends HttpServlet implements DataManager {
     @Override
     public Document getDocument(int numDocument) throws SQLException {
         Connection conn = getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT `id_d`, `titre_d`, `auteur_d`, `type_d`, `emprunt_d`, `options_d` FROM document WHERE `id_d`=?;");
+        PreparedStatement stmt = conn.prepareStatement("SELECT `id_d`, `type_d`, `emprunt_d`, `titre_d`, `auteur_d`, `options_d` FROM document WHERE `id_d`=?;");
         stmt.setInt(1, numDocument);
 
         ResultSet res = stmt.executeQuery();
@@ -134,7 +134,7 @@ public class TestServlet extends HttpServlet implements DataManager {
     @Override
     public void ajoutDocument(int type, Object... args) throws SQLException {
         Connection conn = getConnection();
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO document (`titre_d`, `auteur_d`, `type_d`) VALUES (?, ?, ?);");
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO document (`type_d`, `auteur_d`, `titre_d`) VALUES (?, ?, ?);");
         stmt.setString(1, (String) args[0]);
         stmt.setString(2, (String) args[1]);
         stmt.setString(3, (String) args[2]);

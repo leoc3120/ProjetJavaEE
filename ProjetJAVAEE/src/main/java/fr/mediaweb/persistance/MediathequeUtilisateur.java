@@ -3,38 +3,34 @@ package fr.mediaweb.persistance;
 import mediatek2022.Utilisateur;
 
 public class MediathequeUtilisateur implements Utilisateur {
+	
+	private int IdU;
+	private String nomU;	
+	private String typeU;
 
-	public MediathequeUtilisateur(int idU, String nom, String type) {
+	public MediathequeUtilisateur(int idU, String nomU, String typeU) {
 		this.IdU = idU;
-		this.nom = nom;
-		this.type = type;
+		this.nomU = nomU;
+		this.typeU = typeU;
 	}
 
 	@Override
 	public String name() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.nomU;
 	}
 
 	@Override
 	public boolean isBibliothecaire() {
-		// TODO Auto-generated method stub
+		if(this.typeU=="biblicothécaire") {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public Object[] data() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private int IdU;
-	
-	private String login;
-	
-	private String mdp;
-	
-	private String nom;
-	
-	private String type;
+
 }
