@@ -37,7 +37,8 @@ public class MediathequeData implements PersistentMediatheque {
 
 		return null;
 	}
-
+	
+	@Override
 	public List<Document> tousLesDocumentsDisponibles() {
 		Connection conn = getConnection();
 		Statement stmt;
@@ -61,7 +62,8 @@ public class MediathequeData implements PersistentMediatheque {
 		}
 		return documents;
 	}
-
+	
+	@Override
 	public Utilisateur getUser(String login, String password) {
 		Connection conn = getConnection();
 		PreparedStatement stmt;
@@ -87,7 +89,7 @@ public class MediathequeData implements PersistentMediatheque {
 		}
 		return utilisateur;
 	}
-
+	@Override
 	public Document getDocument(int numDocument) {
 		Connection conn = getConnection();
 		PreparedStatement stmt;
@@ -136,7 +138,8 @@ public class MediathequeData implements PersistentMediatheque {
 		}
 		return id;
 	}
-
+	
+	@Override
 	public void ajoutDocument(int type, Object... args) {
 		Connection conn = getConnection();
 		PreparedStatement stmt;
