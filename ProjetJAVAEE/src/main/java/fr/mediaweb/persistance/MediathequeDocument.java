@@ -39,6 +39,12 @@ public class MediathequeDocument implements Document{
 		assert(empruntePar != null);
 		this.empruntePar =null;
 	}
+	
+	@Override
+	public String toString() {
+		return this.typeD + " " + this.titreD + " " + this.auteurD + "<br>";
+	
+	}
 
 
 }

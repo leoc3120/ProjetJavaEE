@@ -9,8 +9,8 @@
 
 <body>
     
-    <h1>bonjour ${login}</h1><br>
-     <h1>Vos documents actuels : </h1><br>
+    <h1>bonjour ${nomU}</h1><br>
+     <h1>Vos documents actuels : ${documents}</h1><br>
  	<input type="submit" id="BtnEmp">Emprunter</input> <br>
  	<input type="submit" id="BtnRend">Rendre</input><br>
     </form>

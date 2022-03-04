@@ -39,18 +39,28 @@ public class TestServlet extends HttpServlet implements DataManager {
 
 		response.setContentType("text/html");
 		RequestDispatcher view;
+		Utilisateur u;
 		try {
-			if(getUser(request.getParameter("login"),request.getParameter("mdp")) != null) {
+			u = getUser(request.getParameter("login"),request.getParameter("mdp"));
+			if(u != null) {
 				view = request.getRequestDispatcher("WEB-INF/template/pagep.jsp");
-				request.setAttribute("login", request.getParameter("login"));
-				request.setAttribute("documents", tousLesDocumentsDisponibles().get(0).toString());
+				request.setAttribute("nomU", u.name());
+				for(int i=1; i<tousLesDocumentsDisponibles().size(); i++) {
+					if(i == 1) {
+						request.setAttribute("documents", tousLesDocumentsDisponibles().get(i).toString());
+					}
+					else {
+						request.setAttribute("documents", request.getAttribute("documents") 
+								+ tousLesDocumentsDisponibles().get(i).toString());
+					}
+				};
+						
 				view.forward(request, response);
 			}	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		
 		view = request.getRequestDispatcher("WEB-INF/template/accueil.jsp");
 		view.forward(request, response);
 	}
