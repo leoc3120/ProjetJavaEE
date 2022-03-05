@@ -1,0 +1,44 @@
+
+#acceuil{
+    background-image: url("https://i.gifer.com/3IcE.gif");
+    background-repeat: no-repeat;
+    background-color: black;
+    background-size: 100%;
+}
+#co {
+    color : red; 
+  }
+  
+  h1{
+  	text-align : center;
+  }
+
+  @page :first {
+    margin: 2cm;
+  }
+  form {
+  text-align : center;
+  }
+  .boxLogin{
+      border-radius: 5%;
+    margin: 10%;
+    padding: -5%;
+    padding-bottom: 2.5%;
+    margin-left: 35%;
+    margin-right: 35%;
+    border-color: black;
+    border-width: 15%;
+    border : solid;
+    background-color: aliceblue;
+  }
+  #boiteCentrale{
+    margin: 10%;
+    border-color: black;
+    border-width: 15%;
+    border : solid;
+  }
+  #listeD{
+  	margin-left: 35%;
+  	margin-right: 45%;
+  	
+  }

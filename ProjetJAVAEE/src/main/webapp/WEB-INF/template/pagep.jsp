@@ -4,22 +4,22 @@
   
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Sample Page</title>
+    <style><%@include file="/WEB-INF/template/css/style.css"%></style>
+    <title>Votre espace</title>
 </head>
 
 <body>
-
     <h1>bonjour ${nomU}</h1><br>
-     <h1>Vos documents actuels :</h1><br>
-    <select name="my_html_select_box">
-        
+    <div id="boiteCentrale">
+        <h1>Vos documents actuels :</h1><br>
+        <select name="listeD" id="listeD">
             <c:forEach items="${ documents }" var="document" varStatus="status">
             <option><c:out value="${ document }" /></option>
             </c:forEach>
-    </select>
- 	<input type="submit" id="BtnEmp">Emprunter</input> <br>
- 	<input type="submit" id="BtnRend">Rendre</input><br>
-    </form>
+        </select><br>
+ 	    <button type="button" id="BtnEmp">Emprunter</button> <br>
+ 	    <button type="button" id="BtnRend">Rendre</button><br>
+    </div>
 </body>
 
 </html>
