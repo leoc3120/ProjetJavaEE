@@ -17,8 +17,10 @@
             <option><c:out value="${ document }" /></option>
             </c:forEach>
         </select><br>
- 	    <button type="button" id="BtnEmp">Emprunter</button> <br>
- 	    <button type="button" id="BtnRend">Rendre</button><br>
+        <form action="${pageContext.request.contextPath}/myservlet " method="post">
+ 	    <input type="submit" name="BtnEmp" id="BtnEmp">Emprunter</input> <br>
+ 	    <input type="submit" name="BtnRend" id="BtnRend">Rendre</input><br>
+ 	    </form>
     </div>
 </body>
 

@@ -46,6 +46,8 @@ public class ServletMediatheque extends HttpServlet {
 		view = request.getRequestDispatcher("WEB-INF/template/accueil.jsp");
 		view.forward(request, response);
 	}
+    
+   
 
 
     
