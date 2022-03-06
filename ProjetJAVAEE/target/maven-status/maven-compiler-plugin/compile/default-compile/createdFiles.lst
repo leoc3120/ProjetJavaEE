@@ -1,6 +1,8 @@
 fr\mediaweb\persistance\MediathequeData.class
-fr\mediaweb\persistance\MediathequeUtilisateur.class
-fr\mediaweb\persistance\ServletMediatheque2.class
+fr\mediaweb\persistance\InitServlet.class
 fr\mediaweb\persistance\MediathequeDocument.class
 com\airhacks\JAXRSConfiguration.class
 fr\mediaweb\persistance\ServletMediatheque.class
+fr\mediaweb\persistance\MediathequeUtilisateur.class
+fr\mediaweb\persistance\ServletMediatheque2.class
+fr\mediaweb\persistance\InitListener.class

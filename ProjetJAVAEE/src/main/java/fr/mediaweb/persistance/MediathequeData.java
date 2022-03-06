@@ -24,7 +24,7 @@ public class MediathequeData implements PersistentMediatheque {
 		Mediatheque.getInstance().setData(new MediathequeData());
 	}
 
-	protected MediathequeData() {
+	private MediathequeData() {
 	}
 
 	public static Connection getConnection() {
