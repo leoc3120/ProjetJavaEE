@@ -17,9 +17,13 @@
             <option><c:out value="${ document }" /></option>
             </c:forEach>
         </select><br>
-        <form action="${pageContext.request.contextPath}/myservlet " method="post">
- 	    <input type="submit" name="BtnEmp" id="BtnEmp">Emprunter</input> <br>
- 	    <input type="submit" name="BtnRend" id="BtnRend">Rendre</input><br>
+        
+        <form action="${pageContext.request.contextPath}/affiche?login=${login}&mdp=${mdp} " method="post">
+ 	    	<input type="submit" name="BtnEmp" id="BtnEmp">Emprunter</input> <br>
+ 	    	<input type="submit" name="BtnRend" id="BtnRend">Rendre</input><br>
+ 	    	<script>
+ 	    		var valListe = document.getElementById('listeD').selectedOptions[0].value;
+ 	    	</script>
  	    </form>
     </div>
 </body>

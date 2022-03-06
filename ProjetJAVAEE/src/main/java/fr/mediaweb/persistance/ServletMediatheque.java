@@ -28,6 +28,8 @@ public class ServletMediatheque extends HttpServlet {
 		if(u != null) {
 			view = request.getRequestDispatcher("WEB-INF/template/pagep.jsp");
 			request.setAttribute("nomU", u.name());
+			request.setAttribute("login", request.getParameter("login"));
+			request.setAttribute("mdp", request.getParameter("mdp"));
 			/*for(int i=1; i<Mediatheque.tousLesDocumentsDisponibles().size(); i++) {
 				if(i == 1) {
 					request.setAttribute("documents", Mediatheque.tousLesDocumentsDisponibles().get(i).toString());
@@ -48,7 +50,23 @@ public class ServletMediatheque extends HttpServlet {
 	}
     
    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    	response.setContentType("text/html");
+		RequestDispatcher view;
+	
+        if (request.getParameter("BtnEmp") != null) {
+        	//MediathequeData myClass = new MediathequeData();
+            //myClass.emprunterDocument(0, request.getParameter("nomU"));
+            System.out.println("bouton emprunt appuyé");
+            //view.forward(request, response);
+        } else if (request.getParameter("BtnRend") != null) {
+            // myClass.retournerDocument(0);
+            System.out.println("bouton retourner appuyé");
+        } 
+        request.getRequestDispatcher("/WEB-INF/template/pagep.jsp").forward(request, response);
+       }
 
     
 }
