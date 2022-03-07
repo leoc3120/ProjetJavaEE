@@ -5,14 +5,16 @@ import mediatek2022.Utilisateur;
 
 public class MediathequeDocument implements Document{
 	
+	private ConnectSQL c = new ConnectSQL();
+	
 	private int IdD;
 	private String typeD;
-	private String empruntePar;
+	private int empruntePar;
 	private String titreD;
 	private String auteurD;
 	private String descriptionD;
 
-	public MediathequeDocument(int IdD, String typeD, String empruntePar, String titreD, String auteurD, String descriptionD) {
+	public MediathequeDocument(int IdD, String typeD, int empruntePar, String titreD, String auteurD, String descriptionD) {
 		this.IdD = IdD;
 		this.typeD = typeD;
 		this.empruntePar = empruntePar;
@@ -23,28 +25,27 @@ public class MediathequeDocument implements Document{
 
 	@Override
 	public boolean disponible() {
-		if(empruntePar != null)
+		if(empruntePar == -1)
 			return true;
 		return false;
 	}
 
 	@Override
 	public void emprunt(Utilisateur u) throws Exception {
-		assert(empruntePar == null);
-		this.empruntePar = u.name();
+		assert(empruntePar != -1);
+		this.empruntePar = c.emprunterDocument(IdD,u.name());
 	}
 
 	@Override
 	public void retour() {
-		assert(empruntePar != null);
-		this.empruntePar =null;
+		assert(empruntePar != -1);
+		c.retournerDocument(IdD);
+		this.empruntePar = -1;
 	}
 	
 	@Override
 	public String toString() {
-		return this.typeD + " " + this.titreD + " " + this.auteurD + "<br>";
-	
+		return this.typeD + " " + this.titreD + " " + this.auteurD;
 	}
-
 
 }

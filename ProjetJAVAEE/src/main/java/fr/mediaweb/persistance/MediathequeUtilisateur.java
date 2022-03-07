@@ -4,6 +4,8 @@ import mediatek2022.Utilisateur;
 
 public class MediathequeUtilisateur implements Utilisateur {
 	
+	private ConnectSQL c = new ConnectSQL();
+		
 	private int IdU;
 	private String nomU;	
 	private String typeU;
@@ -18,7 +20,7 @@ public class MediathequeUtilisateur implements Utilisateur {
 	public String name() {
 		return this.nomU;
 	}
-
+	
 	@Override
 	public boolean isBibliothecaire() {
 		if(this.typeU=="biblicothécaire") {
@@ -29,7 +31,8 @@ public class MediathequeUtilisateur implements Utilisateur {
 
 	@Override
 	public Object[] data() {
-		return null;
+		Object[] obj = null;
+		return (Object[]) (obj[0] = c.tousLesDocumentsEmpruntés(this));
 	}
 
 

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   
@@ -11,19 +12,17 @@
 <body>
     <h1>bonjour ${nomU}</h1><br>
     <div id="boiteCentrale">
-        <h1>Vos documents actuels :</h1><br>
+        <h1>Les documents de la Mediatheque :</h1><br>
+        <form action="${pageContext.request.contextPath}/affiche" method="get">
         <select name="listeD" id="listeD">
-            <c:forEach items="${ documents }" var="document" varStatus="status">
-            <option><c:out value="${ document }" /></option>
+            <option value="">--Veuillez choisir un document--</option>
+            <c:forEach items= "${ documents }" var="document" varStatus="status">
+            <option><c:out value="${ status.index+1 } ${ document }" /></option>
             </c:forEach>
         </select><br>
-        
-        <form action="${pageContext.request.contextPath}/affiche?login=${login}&mdp=${mdp} " method="post">
+
  	    	<input type="submit" name="BtnEmp" id="BtnEmp">Emprunter</input> <br>
  	    	<input type="submit" name="BtnRend" id="BtnRend">Rendre</input><br>
- 	    	<script>
- 	    		var valListe = document.getElementById('listeD').selectedOptions[0].value;
- 	    	</script>
  	    </form>
     </div>
 </body>
