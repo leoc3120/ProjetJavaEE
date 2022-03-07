@@ -24,56 +24,89 @@ public class ServletMediatheque extends HttpServlet {
 	private ConnectSQL c = new ConnectSQL();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
+			throws IOException, ServletException {
 
-        response.setContentType("text/html");
-        RequestDispatcher view;
-        
-        if(utilisateurEnCours == null) {
-        	utilisateurEnCours = maMediatheque.getUser(request.getParameter("login"),request.getParameter("mdp"));
-        }
-        
-        if(utilisateurEnCours != null) {
-            view = request.getRequestDispatcher("WEB-INF/template/pagep.jsp");
-            request.setAttribute("nomU", utilisateurEnCours.name());
-            List<Document> listeDocuments = maMediatheque.tousLesDocumentsDisponibles();
-            request.setAttribute("documents", listeDocuments);
-            request.setAttribute("nbDoc", listeDocuments.size());
-            //System.out.println(c.tousLesDocumentsEmpruntés(utilisateurEnCours));
-    		if (request.getParameter("BtnEmp") != null) {
-    			System.out.println(request.getParameter("listeD"));
-        		Document doc = listeDocuments.get(Integer.parseInt(request.getParameter("listeD").substring(0,request.getParameter("listeD").indexOf(" "))));
+		response.setContentType("text/html");
+		RequestDispatcher view;
 
-            	try {
-            		if (doc.disponible()) {
-            			maMediatheque.emprunt(doc, utilisateurEnCours);
-            			view.forward(request, response);
-            		}
-            		else {
-            			System.out.println("pas dispo");
-            			view.forward(request, response);
-            		}
-				} catch (Exception e) {
-					e.printStackTrace();
+		// Si aucun utilisateur n'est connecté, alors on tente de se connecter avec les login/mdp entrés
+		if (utilisateurEnCours == null) {
+			utilisateurEnCours = maMediatheque.getUser(request.getParameter("login"), request.getParameter("mdp"));
+			if(utilisateurEnCours == null && request.getParameter("login")!= null && request.getParameter("mdp") !=null) {
+				request.setAttribute("msgAction", "Indentifiants incorrects");
+			}
+		}
+
+		if(utilisateurEnCours != null) {
+			view = request.getRequestDispatcher("WEB-INF/template/pagep.jsp");
+			request.setAttribute("nomU", utilisateurEnCours.name());
+			List<Document> listeDocuments = maMediatheque.tousLesDocumentsDisponibles();
+			request.setAttribute("documents", listeDocuments);
+			request.setAttribute("nbDoc", listeDocuments.size());
+
+			// Bouton "Emprunter un document"
+			if (request.getParameter("BtnEmp") != null) {
+				// Pour ne pas pouvoir sélectionner la ligne "Veuillez choisir un document"
+				if (request.getParameter("listeD") == "") {
+					request.setAttribute("msgAction", "Veuillez sélectionner un document");
+					
+				// Sélection du document choisi
+				} else {
+					Document doc = listeDocuments.get(Integer.parseInt(
+							request.getParameter("listeD").substring(0, request.getParameter("listeD").indexOf(" ")))
+							- 1);
+					try {
+						// Si le document n'est pas disponible, on ne peut pas l'emprunter
+						if (!doc.disponible()) {
+							request.setAttribute("msgAction", doc.toString() + " n'est pas disponible pour le moment");
+							
+						// Emprunt du document
+						} else {
+							maMediatheque.emprunt(doc, utilisateurEnCours);
+							request.setAttribute("msgAction", "Vous avez emprunté " + doc.toString());
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-                 System.out.println("bouton emprunt appuyé");
-                 
-            } else if (request.getParameter("BtnRend") != null) {
-        		Document doc = listeDocuments.get(Integer.parseInt(request.getParameter("listeD").substring(0,request.getParameter("listeD").indexOf(" "))));
+				
+			// Bouton "Rendre un document"
+			} else if (request.getParameter("BtnRend") != null) {
+				// Pour ne pas pouvoir sélectionner la ligne "Veuillez choisir un document"
+				if (request.getParameter("listeD").startsWith("--")) {
+					request.setAttribute("msgAction", "Veuillez sélectionner un document");
 
-                try {
-                	maMediatheque.retour(doc, utilisateurEnCours);
-                	view.forward(request, response);
-				} catch (Exception e) {
-					e.printStackTrace();
+				// Sélection du document choisi
+				} else {
+					Document doc = listeDocuments.get(Integer.parseInt(
+							request.getParameter("listeD").substring(0, request.getParameter("listeD").indexOf(" ")))
+							- 1);
+					try {
+						// Si le document est disponible, alors on ne peut pas le rendre vu qu'on ne l'a pas emprunté
+						if (doc.disponible() == true) {
+							request.setAttribute("msgAction",
+									"Vous n'empruntez pas " + doc.toString() + " pour le moment, vous ne pouvez pas le rendre !");
+							
+						// Retour du document
+						} else {
+							maMediatheque.retour(doc, utilisateurEnCours);
+							request.setAttribute("msgAction", "Vous avez rendu " + doc.toString());
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-                 System.out.println("bouton retourner appuyé");
-            } 
-    		
-            view.forward(request, response);
-        }
+				
+			// Bouton "Se déconnecter"
+			/*} else if (request.getParameter("BtnDeco") != null) {
+				utilisateurEnCours = null;
+				view = request.getRequestDispatcher("WEB-INF/template/accueil.jsp");
+				response.sendRedirect("WEB-INF/template/accueil.jsp");
+			}*/
 
-	 view = request.getRequestDispatcher("WEB-INF/template/accueil.jsp");
-     view.forward(request, response);
-    }
+			view.forward(request, response);
+		}
+		view = request.getRequestDispatcher("WEB-INF/template/accueil.jsp");
+		view.forward(request, response);
+	}
 }

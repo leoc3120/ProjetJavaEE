@@ -73,13 +73,14 @@ public class ConnectSQL {
 		return id_u;
 	}
 
-	public void retournerDocument(int numDocument) {
+	public void retournerDocument(int numDocument, int idUtilisateur) {
 		Connection conn = getConnection();
 		PreparedStatement stmt;
 		try {
-			stmt = conn.prepareStatement("UPDATE document SET `emprunt_d`=-1 WHERE `id_d`=?;");
+			stmt = conn.prepareStatement("UPDATE document SET `emprunt_d`=-1 WHERE `id_d`=? AND `emprunt_d`=?;");
 
 			stmt.setInt(1, numDocument);
+			stmt.setInt(2, idUtilisateur);
 
 			stmt.execute();
 			stmt.close();

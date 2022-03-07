@@ -15,16 +15,21 @@
         <h1>Les documents de la Mediatheque :</h1><br>
         <form action="${pageContext.request.contextPath}/affiche" method="get">
         <select name="listeD" id="listeD">
-            <option value="">--Veuillez choisir un document--</option>
+            <option value="">-- Veuillez choisir un document --</option>
+
             <c:forEach items= "${ documents }" var="document" varStatus="status">
             <option><c:out value="${ status.index+1 } ${ document }" /></option>
             </c:forEach>
         </select><br>
-
  	    	<input type="submit" name="BtnEmp" id="BtnEmp">Emprunter</input> <br>
  	    	<input type="submit" name="BtnRend" id="BtnRend">Rendre</input><br>
  	    </form>
+
+         <div>${msgAction}</div>
     </div>
+
+    <input type="submit" name="BtnDeco" id="BtnDeco"> Se deconnecter</input><br>
+
 </body>
 
 </html>

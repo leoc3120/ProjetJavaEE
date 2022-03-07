@@ -9,16 +9,17 @@
 </head>
 
 
-<body id="acceuil">
+<body id="accueil">
 	<div class="boxLogin">
-    <h1 id="co">Connectez-vous </h1>
-    <form>
-        <b>Login :</b><br>
-        <input type="type" name="login" id="login"></input><br><br>
-        <b>Mot de passe :</b><br>
-        <input type="type" name="mdp" id="mdp"></input><br><br>
-        <input type="submit"></input>
-    </form>
+        <h1 id="co">Connectez-vous </h1>
+        <form>
+            <b>Login :</b><br>
+            <input type="type" name="login" id="login"></input><br><br>
+            <b>Mot de passe :</b><br>
+            <input type="type" name="mdp" id="mdp"></input><br><br>
+            <input type="submit"></input>
+        </form>
+        <div>${msgAction}</div>
     </div>
 </body>
 

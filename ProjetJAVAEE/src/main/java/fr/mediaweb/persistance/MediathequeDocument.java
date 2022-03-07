@@ -39,7 +39,7 @@ public class MediathequeDocument implements Document{
 	@Override
 	public void retour() {
 		assert(empruntePar != -1);
-		c.retournerDocument(IdD);
+		c.retournerDocument(IdD, empruntePar);
 		this.empruntePar = -1;
 	}
 	
