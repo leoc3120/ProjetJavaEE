@@ -21,7 +21,7 @@
             <option><c:out value="${ status.index+1 } ${ document }" /></option>
             </c:forEach>
         </select><br>
- 	    	<input type="submit" name="BtnEmp" id="BtnEmp">Emprunter</input> <br>
+ 	    	<input type="submit" name="BtnEmp" id="BtnEmp">Emprunter</input><br>
  	    	<input type="submit" name="BtnRend" id="BtnRend">Rendre</input><br>
  	    </form>
 
