@@ -17,7 +17,7 @@ public class ConnectSQL {
 	private static final String user = "vmvo1438_mediaweb";
 	private static final String password = "mediaweb4568";
 
-	public static Connection getConnection() {
+	public static Connection connect() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			return DriverManager.getConnection(url, user, password);
@@ -28,15 +28,15 @@ public class ConnectSQL {
 		return null;
 	}
 	
-	private Integer getUserID(String nomUtilisateur) {
-		Connection conn = getConnection();
+	private Integer getUserIDByName(String nomU) {
+		Connection conn = connect();
 		PreparedStatement stmt;
 		ResultSet res;
 		Integer id = null;
 		try {
 			stmt = conn.prepareStatement("SELECT `id_u` FROM utilisateur WHERE `nom_u`=?;");
 
-			stmt.setString(1, nomUtilisateur);
+			stmt.setString(1, nomU);
 
 			res = stmt.executeQuery();
 
@@ -51,12 +51,10 @@ public class ConnectSQL {
 		return id;
 	}
 	
-	
-	
-	public int emprunterDocument(int numDocument, String nomUtilisateur) {
-		int id_u = getUserID(nomUtilisateur);
+	public int emprunterDoc(int numDocument, String nomU) {
+		int id_u = getUserIDByName(nomU);
 
-		Connection conn = getConnection();
+		Connection conn = connect();
 		PreparedStatement stmt;
 		try {
 			stmt = conn.prepareStatement("UPDATE document SET `emprunt_d`=? WHERE `id_d`=?;");
@@ -73,14 +71,14 @@ public class ConnectSQL {
 		return id_u;
 	}
 
-	public void retournerDocument(int numDocument, int idUtilisateur) {
-		Connection conn = getConnection();
+	public void retournerDoc(int numDocument, int idU) {
+		Connection conn = connect();
 		PreparedStatement stmt;
 		try {
 			stmt = conn.prepareStatement("UPDATE document SET `emprunt_d`=-1 WHERE `id_d`=? AND `emprunt_d`=?;");
 
 			stmt.setInt(1, numDocument);
-			stmt.setInt(2, idUtilisateur);
+			stmt.setInt(2, idU);
 
 			stmt.execute();
 			stmt.close();
@@ -92,7 +90,7 @@ public class ConnectSQL {
 	
 	
 	public List<Document> tousLesDocumentsEmpruntés(Utilisateur u) {
-		Connection conn = getConnection();
+		Connection conn = connect();
 		PreparedStatement stmt;
 		ResultSet res;
 		List<Document> documents = new ArrayList<>();
@@ -100,7 +98,7 @@ public class ConnectSQL {
 			stmt = conn.prepareStatement(
 					"SELECT `id_d`, `type_d`, `emprunt_d`, `titre_d`, `auteur_d`, `options_d` FROM document WHERE `emprunt_d`=?;");
 
-			stmt.setInt(1, getUserID(u.name()));
+			stmt.setInt(1, getUserIDByName(u.name()));
 			res = stmt.executeQuery();
 			
 
