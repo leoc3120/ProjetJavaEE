@@ -148,6 +148,9 @@ public class ServletMediatheque extends HttpServlet {
 				}
 				else {
 					view = request.getRequestDispatcher("WEB-INF/template/pagep.jsp");
+					request.setAttribute("login", null);
+					request.setAttribute("mdp", null);
+					utilisateurEnCours = null;
 				}
 				view.forward(request, response);
 			}
