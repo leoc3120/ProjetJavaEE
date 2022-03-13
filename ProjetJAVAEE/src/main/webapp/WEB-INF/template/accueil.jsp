@@ -11,15 +11,15 @@
 
 <body id="accueil">
 	<div class="boxLogin">
-        <h1 id="co">Connectez-vous </h1>
+        <h1 id="actionPage">Connectez-vous </h1>
         <form>
             <b>Login :</b><br>
             <input type="type" name="login" id="login"></input><br><br>
             <b>Mot de passe :</b><br>
             <input type="type" name="mdp" id="mdp"></input><br><br>
+            <div>${msgAction}</div><br><br>
             <input type="submit"></input>
         </form>
-        <div>${msgAction}</div>
     </div>
 </body>
 

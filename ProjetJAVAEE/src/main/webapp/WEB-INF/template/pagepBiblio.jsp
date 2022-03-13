@@ -10,27 +10,26 @@
 </head>
 
 <body>
-    <h1>Bonjour ${nomU} bibliothecaire</h1><br>
 	<div class="boxLogin">
-        <h1 id="co">Ajouter un nouveau document :</h1>
+        <h1>Bonjour ${nomU} le bibliothecaire,</h1><br>
+        <h1 id="actionPage">Ajouter un nouveau document :</h1><br>
         <form>
 
-            <b>Type :</b><br>
+            <b>Type du document : 
             <select name="type" id="type">
                 <option value="Livre">Livre</option>
                 <option value="CD">CD</option>
                 <option value="DVD">DVD</option>
-            </select><br><br>
+            </select></b><br><br>
 
-            <b>Titre :</b><br>
-            <input type="type" name="titre" id="titre"></input><br><br>
+            <b>Titre : <input type="type" name="titre" id="titre"></input></b><br><br>
 
-            <b>Auteur :</b><br>
-            <input type="type" name="auteur" id="auteur"></input><br><br>
+            <b>Auteur : <input type="type" name="auteur" id="auteur"></input></b><br><br>
 
-            <input type="submit" name="BtnAjou" id="BtnAjou"></input>
+            <button type="submit" name="BtnAjou" id="BtnAjou">Ajouter</button><br><br>
+            <div>${msgAction}</div><br><br><br>
+            <button type="submit" name="BtnDeco" id="BtnDeco">Se deconnecter</button>
         </form>
-        <div>${msgAction}</div>
     </div>
 </body>
 
